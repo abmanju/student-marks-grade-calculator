@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f3f6f4">
+    <title>Student Marks &amp; Grade Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+  </head>
+  <body>
+    <main class="page-shell">
+      <header class="workshop-header">
+        <p>BUILD <span>•</span> BREAK <span>•</span> IMPROVE <b>|</b> PRACTICAL WORKSHOP</p>
+        <p>PARTICIPANT HANDOUT <span>•</span> 5</p>
+      </header>
+
+      <section class="calculator" aria-labelledby="page-title">
+        <div class="intro">
+          <div class="brand-mark" aria-hidden="true">M</div>
+          <div>
+            <p class="eyebrow">ACADEMIC TOOLKIT</p>
+            <h1 id="page-title">Student Marks <span>&amp;</span><br>Grade Calculator</h1>
+            <p class="intro-copy">Enter a student's marks to calculate their results across five subjects.</p>
+          </div>
+        </div>
+
+        <form id="marks-form" novalidate>
+          <section class="form-section" aria-labelledby="student-heading">
+            <div class="section-heading">
+              <span class="section-number">01</span>
+              <div>
+                <h2 id="student-heading">Student details</h2>
+                <p>Start with the student's name.</p>
+              </div>
+            </div>
+            <div class="field student-field">
+              <label for="student-name">Student name</label>
+              <input id="student-name" name="studentName" type="text" autocomplete="name" placeholder="e.g. Alex Morgan" aria-describedby="student-name-error">
+              <span class="field-error" id="student-name-error"></span>
+            </div>
+          </section>
+
+          <section class="form-section marks-section" aria-labelledby="marks-heading">
+            <div class="section-heading">
+              <span class="section-number">02</span>
+              <div>
+                <h2 id="marks-heading">Subject marks</h2>
+                <p>Enter a mark from 0 to 100 for each subject.</p>
+              </div>
+              <span class="marks-scale">EACH OUT OF 100</span>
+            </div>
+
+            <div class="marks-grid">
+              <div class="field">
+                <label for="mark-1"><span class="subject-index">01</span> Subject 1</label>
+                <div class="input-wrap">
+                  <input class="mark-input" id="mark-1" name="mark1" type="number" min="0" max="100" step="any" inputmode="decimal" placeholder="0–100" aria-describedby="mark-1-error">
+                  <span class="input-suffix" aria-hidden="true">/ 100</span>
+                </div>
+                <span class="field-error" id="mark-1-error"></span>
+              </div>
+              <div class="field">
+                <label for="mark-2"><span class="subject-index">02</span> Subject 2</label>
+                <div class="input-wrap">
+                  <input class="mark-input" id="mark-2" name="mark2" type="number" min="0" max="100" step="any" inputmode="decimal" placeholder="0–100" aria-describedby="mark-2-error">
+                  <span class="input-suffix" aria-hidden="true">/ 100</span>
+                </div>
+                <span class="field-error" id="mark-2-error"></span>
+              </div>
+              <div class="field">
+                <label for="mark-3"><span class="subject-index">03</span> Subject 3</label>
+                <div class="input-wrap">
+                  <input class="mark-input" id="mark-3" name="mark3" type="number" min="0" max="100" step="any" inputmode="decimal" placeholder="0–100" aria-describedby="mark-3-error">
+                  <span class="input-suffix" aria-hidden="true">/ 100</span>
+                </div>
+                <span class="field-error" id="mark-3-error"></span>
+              </div>
+              <div class="field">
+                <label for="mark-4"><span class="subject-index">04</span> Subject 4</label>
+                <div class="input-wrap">
+                  <input class="mark-input" id="mark-4" name="mark4" type="number" min="0" max="100" step="any" inputmode="decimal" placeholder="0–100" aria-describedby="mark-4-error">
+                  <span class="input-suffix" aria-hidden="true">/ 100</span>
+                </div>
+                <span class="field-error" id="mark-4-error"></span>
+              </div>
+              <div class="field">
+                <label for="mark-5"><span class="subject-index">05</span> Subject 5</label>
+                <div class="input-wrap">
+                  <input class="mark-input" id="mark-5" name="mark5" type="number" min="0" max="100" step="any" inputmode="decimal" placeholder="0–100" aria-describedby="mark-5-error">
+                  <span class="input-suffix" aria-hidden="true">/ 100</span>
+                </div>
+                <span class="field-error" id="mark-5-error"></span>
+              </div>
+            </div>
+          </section>
+
+          <div class="error-summary" id="form-error" role="alert" hidden></div>
+
+          <div class="form-actions">
+            <button class="button button-primary" type="submit">Calculate results <span aria-hidden="true">→</span></button>
+            <button class="button button-secondary" type="reset">Reset</button>
+          </div>
+        </form>
+
+        <section class="results" id="results" aria-labelledby="results-heading" aria-live="polite" hidden>
+          <div class="results-heading">
+            <div>
+              <p class="eyebrow">RESULT SUMMARY</p>
+              <h2 id="results-heading">Results for <span id="result-name"></span></h2>
+            </div>
+            <span class="grade-badge" id="result-grade" aria-label="Grade"></span>
+          </div>
+          <div class="result-grid">
+            <div class="result-item">
+              <span class="result-label">TOTAL MARKS</span>
+              <strong><span id="result-total"></span><span class="result-unit"> / 500</span></strong>
+            </div>
+            <div class="result-item">
+              <span class="result-label">AVERAGE</span>
+              <strong><span id="result-average"></span><span class="result-unit">%</span></strong>
+            </div>
+            <div class="result-item status-item">
+              <span class="result-label">OVERALL STATUS</span>
+              <strong id="result-status"></strong>
+            </div>
+          </div>
+          <p class="pass-note">Passing requires at least 40 marks in every subject.</p>
+        </section>
+
+        <footer class="card-footer">
+          <span>FIVE SUBJECTS</span><i aria-hidden="true"></i>
+          <span>500 TOTAL MARKS</span><i aria-hidden="true"></i>
+          <span>ONE CLEAR RESULT</span>
+        </footer>
+      </section>
+      <p class="page-note">A simple way to turn marks into a clearer picture.</p>
+    </main>
+  </body>
+</html>
